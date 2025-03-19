@@ -4,8 +4,7 @@ import StudentRegistrationForm from "../students/StudentRegistrationForm";
 import StudentList from "../students/StudentList";
 import StudentsByTeacher from "../students/StudentsByTeacher";
 import TeacherForm from "../teachers/TeacherForm";
-import TeacherList from "../teachers/TeacherList";
-import TeacherDetailDialog from "../teachers/TeacherDetailDialog";
+import TeacherView from "../teachers/TeacherView";
 import AssignmentInterface from "../assignments/AssignmentInterface";
 import SummaryCards from "./SummaryCards";
 
@@ -251,35 +250,7 @@ const DashboardTabs: React.FC<DashboardTabsProps> = ({
         <TabsContent value="teachers" className="space-y-6">
           <div className="grid grid-cols-1 gap-8">
             <TeacherForm onSubmit={handleTeacherSubmit} />
-            <TeacherList
-              teachers={teachers}
-              onEdit={(teacher) => console.log("Edit teacher:", teacher)}
-              onDelete={(id) => {
-                setTeachers(teachers.filter((teacher) => teacher.id !== id));
-                // Close the detail dialog if the deleted teacher was selected
-                if (
-                  selectedTeacherDetails &&
-                  selectedTeacherDetails.id === id
-                ) {
-                  setShowTeacherDetails(false);
-                  setSelectedTeacherDetails(null);
-                }
-              }}
-              onViewSalary={(teacher) =>
-                console.log("View salary details:", teacher)
-              }
-              onViewDetails={(teacher) => {
-                setSelectedTeacherDetails(teacher);
-                setShowTeacherDetails(true);
-              }}
-            />
-
-            <TeacherDetailDialog
-              isOpen={showTeacherDetails}
-              onClose={() => setShowTeacherDetails(false)}
-              teacher={selectedTeacherDetails}
-              students={students}
-            />
+            <TeacherView />
           </div>
         </TabsContent>
 
